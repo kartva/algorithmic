@@ -30,54 +30,10 @@ def run_algorithm(
     Returns:
         Numpy array of shape (height, width, 3) with int32 RGB values
     """
-    start_x = width // 2
-    start_y = height // 2
 
-    # Shuffle colors
-    random.shuffle(colors_list)
-    total_colors = len(colors_list)
-
-    # Canvas state
     pixels: npt.NDArray[np.int32] = np.zeros((height, width, 3), dtype=np.int32)
-    placed: npt.NDArray[np.bool_] = np.zeros((height, width), dtype=np.bool_)
-    available: set[tuple[int, int]] = {(start_x, start_y)}
 
-    # Place all colors
-    for i, color in enumerate(colors_list):
-        if on_progress is not None and i % progress_interval == 0:
-            on_progress(i, total_colors, pixels)
+    # do stuff to the pixels
 
-        # Find best position by evaluating all available positions
-        best_x, best_y = -1, -1
-        best_diff = MAX_DIFF
-
-        for ax, ay in available:
-            # Calculate minimum color difference to placed neighbors
-            min_diff = MAX_DIFF
-            for nx, ny in get_neighbors(ax, ay, width, height):
-                if placed[ny, nx]:
-                    diff = color_diff(pixels[ny, nx], color)
-                    if diff < min_diff:
-                        min_diff = diff
-
-            if min_diff <= best_diff:
-                best_diff = min_diff
-                best_x, best_y = ax, ay
-
-        # Place the pixel
-        pixels[best_y, best_x] = color
-        placed[best_y, best_x] = True
-
-        # Update available set
-        available.discard((best_x, best_y))
-
-        # Add empty neighbors to available set
-        for nx, ny in get_neighbors(best_x, best_y, width, height):
-            if not placed[ny, nx]:
-                available.add((nx, ny))
-
-    # Final progress callback
-    if on_progress is not None:
-        on_progress(total_colors, total_colors, pixels)
 
     return pixels
