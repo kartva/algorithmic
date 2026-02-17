@@ -25,6 +25,12 @@ Example output (run with four seeds in all four corners.)
 <img width="1280" height="640" alt="up-out" src="https://github.com/user-attachments/assets/809d1207-5e21-4615-9a51-04f8a4503bca" />
 </p>
 
+## Workshop photos!
+
+This workshop took place on 11 Feb 2026.
+
+<img width="600" src="https://github.com/user-attachments/assets/c915fd2f-b496-4314-b7ff-76cbac9f33dc" />
+
 ## Quick Start
 
 Press `.` **on this Github page** to launch a [Github Codespace](https://github.com/features/codespaces) environment. The project has been tested to run on their default container image (which has Python pre-installed.)
